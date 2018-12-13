@@ -5,34 +5,47 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_prof"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Profilim" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_yemek"
+            android:icon="@drawable/ic_local_dining_black_24dp"
+            android:title="Yemekler" />
+
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Etkileşim">
         <menu>
+            <item
+                android:id="@+id/nav_arki"
+                android:icon="@drawable/ic_people_black_24dp"
+                android:title="Arkadaşlarım" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Paylaş" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Gönder" />
         </menu>
+    </item>
+    <item android:title="Hakkımızda">
+        <menu>
+            <item
+                android:id="@+id/nav_keto"
+                android:icon="@drawable/ic_library_books_black_24dp"
+                android:title="Ketojenik Beslenme Nedir?" />
+            <item
+                android:id="@+id/nav_ketoPlan"
+                android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+                android:title="Ketojenik Diyet Planı" />
+
+        </menu>
+
+
     </item>
 
 </menu>
