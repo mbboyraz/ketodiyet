@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "879368933537",
+    "firebase_url": "https://ketodiyet-a25af.firebaseio.com",
+    "project_id": "ketodiyet-a25af",
+    "storage_bucket": "ketodiyet-a25af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879368933537:android:58bef3ef3eb34b84",
+        "android_client_info": {
+          "package_name": "com.ketodiyeti.ketodiyeti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879368933537-0ul3pjfkrgna6am7enqeh2up4g8svn7l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ketodiyeti.ketodiyeti",
+            "certificate_hash": "dc8c2c7bf0b89955fb09b14c79054d83312c989e"
+          }
+        },
+        {
+          "client_id": "879368933537-0kcnnq5urq11ibou2s2hml7bg9rp6hg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPWzhbr-U8AGedsh8hnUzif5mJOfaQtGc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879368933537-0kcnnq5urq11ibou2s2hml7bg9rp6hg2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
