@@ -12,11 +12,13 @@ import android.widget.TextView;
 
 import com.ketodiyeti.ketodiyeti.Classes.Person;
 import com.ketodiyeti.ketodiyeti.R;
+import com.ketodiyeti.ketodiyeti.parcelable.PersonVM;
 
 public class PersonalActivity extends AppCompatActivity implements View.OnClickListener {
     EditText edt_kilo, edt_yas, edt_boy;
     RadioButton radio_erkek, radio_kadin;
     Person person;
+    PersonVM personVM;
     Bundle extras;
     String cinsiyet;
     Button btn_kaydet;
@@ -68,6 +70,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         if (yas.matches("") || boy.matches("") || kilo.matches("")) {
             txt_uyari.setVisibility(View.VISIBLE);
         } else {
+
 
             person = new Person(extras.getString("name"), extras.getString("email"), edt_yas.getText().toString(), edt_kilo.getText().toString(), edt_boy.getText().toString(),
                     cinsiyet, extras.getString("usersid"), extras.getString("photourl"));

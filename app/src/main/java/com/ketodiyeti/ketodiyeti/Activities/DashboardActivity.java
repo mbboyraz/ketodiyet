@@ -2,11 +2,15 @@ package com.ketodiyeti.ketodiyeti.Activities;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,17 +19,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ketodiyeti.ketodiyeti.Classes.Person;
 import com.ketodiyeti.ketodiyeti.R;
+import com.ketodiyeti.ketodiyeti.adapter.ViewPagerAdapter;
+import com.ketodiyeti.ketodiyeti.fragments.AksamFragment;
+import com.ketodiyeti.ketodiyeti.fragments.AraOgunFragment;
+import com.ketodiyeti.ketodiyeti.fragments.KahvaltiFragment;
+import com.ketodiyeti.ketodiyeti.fragments.OgleFragment;
+import com.ketodiyeti.ketodiyeti.fragments.TotalFragment;
 import com.squareup.picasso.Picasso;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener,
+        TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
     Person person;
     Bundle extras;
     ImageView photo_imgview;
     TextView txt_personName, txt_personEmail;
+
+    private SwipeRefreshLayout swipeRefreshLayout = null;
+    private TabLayout tabLayout = null;
+    private ViewPager vpFragments = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +79,9 @@ public class DashboardActivity extends AppCompatActivity
         photo_imgview = findViewById(R.id.imageView);
         txt_personName = findViewById(R.id.personname_txt);
         txt_personEmail = findViewById(R.id.personemail_txt);
+        swipeRefreshLayout = findViewById(R.id.activity_view_pager_sample_swipeRefreshLayout);
+        tabLayout = findViewById(R.id.activity_view_pager_sample_tablayout);
+        vpFragments = findViewById(R.id.activity_view_pager_sample_vpFragments);
     }
 
     public void initView() {
@@ -70,7 +89,69 @@ public class DashboardActivity extends AppCompatActivity
         photo_imgview.setImageURI(Uri.parse(person.getFotoUrl()));
         txt_personName.setText(person.getIsim());
         txt_personEmail.setText(person.getMail());
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        tabLayout.setupWithViewPager(vpFragments);
+        tabLayout.addOnTabSelectedListener(this);
+
+        ViewPagerAdapter viewpagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        TotalFragment totalFragment = new TotalFragment();
+        KahvaltiFragment kahvaltiFragment = new KahvaltiFragment();
+        OgleFragment ogleFragment = new OgleFragment();
+        AksamFragment aksamFragment = new AksamFragment();
+        AraOgunFragment araOgunFragment = new AraOgunFragment();
+
+        viewpagerAdapter.addFragment(totalFragment, "Toplam");
+        viewpagerAdapter.addFragment(kahvaltiFragment, "Kahvaltı");
+        viewpagerAdapter.addFragment(ogleFragment, "Öğle");
+        viewpagerAdapter.addFragment(araOgunFragment, "Ara Öğün");
+        viewpagerAdapter.addFragment(aksamFragment, "Akşam");
+
+        vpFragments.setAdapter(viewpagerAdapter);
+        vpFragments.addOnPageChangeListener(this);
+        vpFragments.setCurrentItem(0);
     }
+
+    @Override
+    public void onRefresh() {
+
+
+        new CountDownTimer(5000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                Toast.makeText(DashboardActivity.this, "Kalan Süre" + millisUntilFinished, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
+        }.start();
+
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+        Toast.makeText(this, "İlk kez seçilen tab " + tab.getText(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+        Toast.makeText(this, "Seçimi kaldırılan tab : " + tab.getText(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+        Toast.makeText(this, "Yeniden Seçilen Tab" + tab.getText(), Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -129,5 +210,23 @@ public class DashboardActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        Toast.makeText(this, "Fragment Scrolled", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+    @Override
+    public void onPageSelected(int position) {
+        Toast.makeText(this, "Fragment Selected", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        Toast.makeText(this, "Fragment onPageScrollStateChanged", Toast.LENGTH_SHORT).show();
     }
 }
